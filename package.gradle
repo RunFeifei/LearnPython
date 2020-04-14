@@ -1,0 +1,237 @@
+subprojects {
+    apply plugin: 'maven'
+    apply plugin: 'idea'
+
+    ext {
+        public_repo = {
+                aliyun    : 'http://maven.aliyun.com/nexus/content/groups/public/',
+                jitpack_io: 'https://jitpack.io',
+        }
+        ab = [
+        ]
+        nexus_shishike = [
+                jcenter         : 'http://nexus.shishike.com/nexus/content/repositories/jcenter/',
+                releases        : 'http://nexus.shishike.com/nexus/content/repositories/releases/',
+                android_release : 'http://nexus.shishike.com/nexus/content/repositories/AndroidRelease/',
+                android_snapshot: 'http://nexus.shishike.com/nexus/content/repositories/AndroidSnapshot/',
+        ]
+
+        test_depends = [
+                junit                         : 'junit:junit:4.6',
+                mockito_core                  : 'org.mockito:mockito-core:2.7.22',
+                robolectric                   : 'org.robolectric:robolectric:3.6.1',
+                robolectric_shadows_multidex  : 'org.robolectric:shadows-multidex:3.6.1',
+                robolectric_shadows_support_v4: 'org.robolectric:shadows-support-v4:3.3.2',
+                easymock                      : 'org.easymock:easymock:3.4',
+                powermock_core                : 'org.powermock:powermock-core:1.6.5',
+                powermock_module_junit4       : 'org.powermock:powermock-module-junit4:1.6.5',
+                powermock_api_easymock        : 'org.powermock:powermock-api-easymock:1.6.5',
+                okhttp3_logging_interceptor   : 'com.squareup.okhttp3:logging-interceptor:3.8.0@jar',
+        ]
+
+        kry_test_depends = [
+                api_detection    : 'com.keruyun.android:api-dectection:1.1.0',
+                api_detection_jar: 'com.keruyun.android:api-dectection:1.1.0@jar',
+        ]
+
+        android_test_depends = [
+                robotium_solo: 'com.jayway.android.robotium:robotium-solo:5.5.4',
+                uiautomator  : 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1',
+        ]
+
+        apt_compiler = [
+                android_lifecycle_compiler: 'android.arch.lifecycle:compiler:1.1.0',
+                butterknife_compiler      : 'com.jakewharton:butterknife-compiler:8.1.0',
+                arouter_compiler          : 'com.alibaba:arouter-compiler:1.1.3',
+        ]
+
+        depends_kotlin = [
+                kotlin_stdlib_jre7: "org.jetbrains.kotlin:kotlin-stdlib-jre7:1.2.10",
+                kotlin_stdlib_jdk7: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.50",
+        ]
+
+        depends = [
+                com_android_support_support_core_ui    : 'com.android.support:support-core-ui:25.0.1',
+                com_android_support_support_annotations: 'com.android.support:support-annotations:25.0.1',
+                com_android_support_support_v4         : 'com.android.support:support-v4:25.0.1',
+                com_android_support_appcompat_7        : 'com.android.support:appcompat-v7:25.0.1',
+                com_android_support_recyclerview_v7    : 'com.android.support:recyclerview-v7:25.0.1',
+                com_android_support_cardview_v7        : 'com.android.support:cardview-v7:25.0.1',
+                com_android_support_design             : 'com.android.support:design:25.0.1',
+                com_android_support_multidex           : 'com.android.support:multidex:1.0.1',
+                com_android_constraint_layout          : 'com.android.support.constraint:constraint-layout:1.0.2',
+                android_arch_lifecycle_runtime         : 'android.arch.lifecycle:runtime:1.1.0',
+                android_arch_lifecycle_extensions      : 'android.arch.lifecycle:extensions:1.1.0',
+                turbodex                               : 'com.github.asLody:turbodex:1.1.0',
+                okhttp3                                : 'com.squareup.okhttp3:okhttp:3.8.1',
+                retrofit2                              : 'com.squareup.retrofit2:retrofit:2.2.0',
+                okhttp3_logging_interceptor            : 'com.squareup.okhttp3:logging-interceptor:3.8.0',
+                gson                                   : 'com.google.code.gson:gson:2.8.0',
+                retrofit2_converter_gson               : 'com.squareup.retrofit2:converter-gson:2.2.0',
+                glide                                  : 'com.github.bumptech.glide:glide:3.7.0',
+                eventbus                               : 'de.greenrobot:eventbus:2.4.1',
+                eventbus_3                             : 'org.greenrobot:eventbus:3.0.0',
+                qiniu_happy_dns                        : 'com.qiniu:happy-dns:0.2.12',
+                qiniu_android_sdk                      : 'com.qiniu:qiniu-android-sdk:7.3.10',
+                butterknife                            : 'com.jakewharton:butterknife:8.1.0',
+                zxing_core                             : 'com.google.zxing:core:3.3.0',
+                zxing_android_core                     : 'com.google.zxing:android-core:3.3.0',
+                ormlite_core                           : 'com.j256.ormlite:ormlite-core:5.0',
+                ormlite_android                        : 'com.j256.ormlite:ormlite-android:5.0',
+                blankj_utilcode                        : 'com.blankj:utilcode:1.3.6',
+                circleimageview                        : 'de.hdodenhof:circleimageview:2.1.0',
+                betterpickers_library                  : 'com.code-troopers.betterpickers:library:3.1.0',
+                material_spinner                       : 'com.jaredrummler:material-spinner:1.2.4',
+                swipemenulistview                      : 'com.baoyz.swipemenulistview:library:1.3.0',
+                android_pickerview                     : 'com.contrarywind:Android-PickerView:3.2.5',
+                flyco_tab_layout_lib                   : 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar',
+                arouter_api                            : 'com.alibaba:arouter-api:1.2.2',
+                fastjson                               : 'com.alibaba:fastjson:1.2.9',
+                alibaba_fastjson                       : 'com.alibaba:fastjson:1.2.9',
+                pinyin4j                               : 'com.belerweb:pinyin4j:2.5.1',
+                jpinyin                                : 'com.github.stuxuhai:jpinyin:1.1.8',
+                debug_db                               : 'com.amitshekhar.android:debug-db:1.0.0',
+                jetbrains_annotations                  : 'org.jetbrains:annotations:15.0',
+                nanohttpd                              : 'com.nanohttpd:nanohttpd:2.2.0',
+        ]
+
+        kry_self_depends = [
+                nanohttpd_core: "org.nanohttpd:nanohttpd-core:1.0.0@jar",
+        ]
+
+        analytics = [
+                umeng: 'com.umeng.analytics:analytics:6.1.2',
+        ]
+
+        provided_depends = [
+                bw_odm_sdk: 'com.keruyun.osmobile:android-bw-odm:2.0.1',
+        ]
+
+        component_depends = [
+                android_mid_pkg_core      : 'com.keruyun.osmobile:android-mid-pkg-core:1.0.12',
+                android_mid_pkg_container : 'com.keruyun.osmobile:android-mid-pkg-container:1.0.12',
+                android_mid_pkg_entrance  : 'com.keruyun.osmobile:android-mid-pkg-entrance:1.0.12',
+                recyclerview_helper       : 'com.keruyun.android:recyclerview-helper:2.5.7',
+                data_state_container      : 'com.keruyun.android:data-state-container:2.5.1',
+                osmobile_dialog           : 'com.keruyun.android:osmobile-dialog:2.5.7',
+                osmobile_title_manager    : 'com.keruyun.android:osmobile-title-manager:2.5.7',
+                widget_digitinputview     : 'com.keruyun.android:widget-digitinputview:2.5.3',
+                keruyun_qrcode            : 'com.keruyun.android:qrcode:2.5.9',
+                bw_pos_sdk                : 'com.keruyun.osmobile:bw-pos-sdk:2.0.4',
+                qb_ipos_sdk               : 'com.keruyun.osmobile:qb-ipos-sdk:2.1.50',
+                android_utils             : 'com.keruyun.android:android-utils:2.8.222',
+                android_networker         : 'com.keruyun.android:android-networker:2.8.32',
+                android_mobilecommondata  : 'com.keruyun.android:android-mobilecommondata:2.9.58',
+                android_mobileui          : 'com.keruyun.android:android-mobileui:2.8.27',
+                mlog                      : 'com.keruyun.android:mlog:2.4.0',
+                osm_resource              : 'com.keruyun.osmobile:osm-resource:2.0.1',
+                android_pushlib           : 'com.keruyun.calm:push-netty:3.0.1',
+                android_updater           : 'com.keruyun.android:android-updater:2.0.1',
+                android_safe_webview      : "com.keruyun.android:android-safe-webview:2.4.6",
+                icbc_pos_sdk              : 'com.keruyun.osmobile:android-icbck-possdk:2.0.1',
+                lefusdk                   : 'com.keruyun.osmobile:lefusdk:2.2.12',
+                helibaosdk                : 'com.keruyun.osmobile:helibaosdk:2.2.12',
+                kayousdk                  : 'com.keruyun.osmobile:kayousdk:2.0.1',
+                android_kitchen_print     : 'com.keruyun.android:android-kitchen-print:2.3.1',
+                keruyun_printer           : 'com.keruyun.print:print:2.22.0',
+                icbc_printer              : 'com.keruyun.osmobile:icbc-printer:2.6.10',
+                pos_local_printer         : 'com.keruyun.android:pos-local-printer:2.7.1',
+                osmobile_settings         : 'com.keruyun.android:osmobile-settings:2.5.22',
+                printcenter               : 'com.keruyun.android:printcenter:2.6.30',
+
+                trade_business_core       : 'com.keruyun.osmobile:trade-business-core:2.9.24',
+                tradebusiness             : 'com.keruyun.osmobile:tradebusiness:2.9.24',
+
+                paycenter                 : 'com.keruyun.mobile:paycenter:2.9.20',//2.9.10
+                paycenter_board           : 'com.keruyun.mobile:paycenter-board:2.9.20',//2.9.10
+                bankpay                   : 'com.keruyun.osmobile:bankpay:2.8.0',
+                icbcposbridge             : 'com.keruyun.osmobile:icbc-pos-bridge:2.1.0',
+                lefukayoupay              : 'com.keruyun.osmobile:lefukayoupay:2.7.30',
+                groupcoupon               : 'com.keruyun.osmobile:groupcoupon:2.4.89',
+                icard_pay_core            : 'com.keruyun.osmobile:icard-pay-core:2.0.1',
+                icard_pay_ui              : 'com.keruyun.osmobile:icard-pay-ui:2.4.0',
+                batman_card               : 'com.keruyun.android:batman-card:2.5.0',
+                cashpay                   : 'com.keruyun.osmobile:cashpay:2.8.91',
+                thirdpay                  : 'com.keruyun.osmobile:thirdpay:2.7.11',
+                custompay                 : 'com.keruyun.mobile:custompay:2.4.4',
+                qianbao_pay               : 'com.keruyun.osmobile:qianbaopay:1.2.013',
+                qianbao_ipos_register     : 'com.keruyun.osmobile:qianbao-ipos-register:1.2.7',
+                ipos_printer              : 'com.keruyun.osmobile:ipos-printer:2.6.0',
+                band_zoo                  : 'com.keruyun.osmobile:band-zoo:2.4.1',
+                osmobile_band_server      : 'com.keruyun.osmobile:android-osmobile-band-server:2.4.1',
+                osmobile_band_pay         : 'com.keruyun.osmobile:android-osmobile-band-pay:2.4.0',
+                osmobile_country_selector : 'com.keruyun.osmobile:android-country-selector:2.5.50',
+                common_kmobile            : 'com.keruyun.kmobile:commonkmobile:1.5.14',//1.5.20
+                cloud_printer             : 'com.keruyun.osmobile:cloudprinter:1.2.21',
+                cloud_printer_ui          : 'com.keruyun.osmobile:android-cloudprinter-ui:1.2.21',
+                account_system_entrance   : 'com.keruyun.mobile:account-system-entrance:1.9.54',
+        ]
+        component_depends_dev = [
+                cloud_printer             : 'com.keruyun.osmobile:cloudprinter:1.2.0-SNAPSHOT',
+                cloud_printer_ui          : 'com.keruyun.osmobile:android-cloudprinter-ui:1.2.0-SNAPSHOT',
+                android_mobileui          : 'com.keruyun.android:android-mobileui:2.8.27-SNAPSHOT',
+                common_kmobile            : 'com.keruyun.kmobile:commonkmobile:1.5.20-SNAPSHOT',
+                paycenter                 : 'com.keruyun.mobile:paycenter:2.9.20-SNAPSHOT',
+                paycenter_board           : 'com.keruyun.mobile:paycenter-board:2.9.20-SNAPSHOT',
+                account_system_entrance   : 'com.keruyun.mobile:account-system-entrance:1.9.54',
+                trade_business_core       : 'com.keruyun.osmobile:trade-business-core:2.9.24-SNAPSHOT',
+                tradebusiness             : 'com.keruyun.osmobile:tradebusiness:2.9.24-SNAPSHOT',
+        ]
+
+        res_provided = [
+
+        ]
+        res_depends = [
+
+        ]
+
+        osm_depends = [
+                android_login             : 'com.keruyun.android:android-login:2.8.1',
+                android_arouter_cold_start: 'com.keruyun.osmobile:android-arouter-cold-start:2.8.2',
+                osmobile_login_ui         : 'com.keruyun.osmobile:osmobile-login-ui:2.8.2',
+                osmobile_login_debug      : 'com.keruyun.osmobile:osmobile-login-debug:2.8.2',
+                android_os_mobile_login_ad: 'com.keruyun.osmobile:android-os-mobile-login-ad:2.8.2',
+                member                    : 'com.keruyun.osmobile:member:2.10.21',
+                mobilepay                 : 'com.keruyun.osmobile:mobilepay:2.9.0',
+                plugin_pay                : 'com.keruyun.osmobile:plugin-pay:2.9.0',
+                osmobilelib               : 'com.keruyun.osmobile:osmobilelib:2.8.5',
+                snack                     : 'com.keruyun.osmobile:snack:2.9.2',
+                dinner                    : 'com.keruyun.mobile:dinner:2.24.30',
+                queue                     : 'com.keruyun.osmobile:queue:2.8.1',
+                shop                      : 'com.keruyun.osmobile:shop:2.9.1',
+                traderecord               : 'com.keruyun.osmobile:traderecord:2.8.9-SNAPSHOT',
+                cashnoorder_osmobile      : 'com.keruyun.osmobile:cashnoorder-osmobile:2.8.7',
+                groupbuy                  : 'com.keruyun.osmobile:groupbuy:2.8.0',
+                icbc_register             : 'com.keruyun.osmobile:icbc-register:1.0.10',
+        ]
+        osm_depends_dev = [
+                android_login             : 'com.keruyun.android:android-login:2.8.1',
+                android_arouter_cold_start: 'com.keruyun.osmobile:android-arouter-cold-start:2.8.2-SNAPSHOT',
+                osmobile_login_ui         : 'com.keruyun.osmobile:osmobile-login-ui:2.8.2-SNAPSHOT',
+                osmobile_login_debug      : 'com.keruyun.osmobile:osmobile-login-debug:2.8.2-SNAPSHOT',
+                android_os_mobile_login_ad: 'com.keruyun.osmobile:android-os-mobile-login-ad:2.8.2-SNAPSHOT',
+                member                    : 'com.keruyun.osmobile:member:2.10.21-SNAPSHOT',
+                mobilepay                 : 'com.keruyun.osmobile:mobilepay:2.9.0',
+                plugin_pay                : 'com.keruyun.osmobile:plugin-pay:2.9.0',
+                osmobilelib               : 'com.keruyun.osmobile:osmobilelib:2.8.5',
+                snack                     : 'com.keruyun.osmobile:snack:2.9.2',
+                dinner                    : 'com.keruyun.mobile:dinner:2.24.30',
+                queue                     : 'com.keruyun.osmobile:queue:2.8.0-SNAPSHOT',
+                shop                      : 'com.keruyun.osmobile:shop:2.9.1',
+                traderecord               : 'com.keruyun.osmobile:traderecord:2.8.9-SNAPSHOT',
+                cashnoorder_osmobile      : 'com.keruyun.osmobile:cashnoorder-osmobile:2.8.7',
+                groupbuy                  : 'com.keruyun.osmobile:groupbuy:2.8.0-SNAPSHOT',
+        ]
+
+        ot_java = [
+                ot_sdk: 'com.keruyun.calm:ot-sdk:SPRINT-1923-SNAPSHOT',
+                lombok: 'org.projectlombok:lombok:1.16.6'
+        ]
+
+        ot_java_dev = [
+                ot_sdk: 'com.keruyun.calm:ot-sdk:SPRINT-1923-SNAPSHOT',
+                lombok: 'org.projectlombok:lombok:1.16.6'
+        ]
+
+    }
+}
