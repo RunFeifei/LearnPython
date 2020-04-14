@@ -199,28 +199,10 @@ subprojects {
                 dinner                    : 'com.keruyun.mobile:dinner:2.24.30',
                 queue                     : 'com.keruyun.osmobile:queue:2.8.1',
                 shop                      : 'com.keruyun.osmobile:shop:2.9.1',
-                traderecord               : 'com.keruyun.osmobile:traderecord:2.8.9-SNAPSHOT',
+                traderecord               : 'com.keruyun.osmobile:traderecord:2.8.9',
                 cashnoorder_osmobile      : 'com.keruyun.osmobile:cashnoorder-osmobile:2.8.7',
                 groupbuy                  : 'com.keruyun.osmobile:groupbuy:2.8.0',
                 icbc_register             : 'com.keruyun.osmobile:icbc-register:1.0.10',
-        ]
-        osm_depends_dev = [
-                android_login             : 'com.keruyun.android:android-login:2.8.1',
-                android_arouter_cold_start: 'com.keruyun.osmobile:android-arouter-cold-start:2.8.2-SNAPSHOT',
-                osmobile_login_ui         : 'com.keruyun.osmobile:osmobile-login-ui:2.8.2-SNAPSHOT',
-                osmobile_login_debug      : 'com.keruyun.osmobile:osmobile-login-debug:2.8.2-SNAPSHOT',
-                android_os_mobile_login_ad: 'com.keruyun.osmobile:android-os-mobile-login-ad:2.8.2-SNAPSHOT',
-                member                    : 'com.keruyun.osmobile:member:2.10.21-SNAPSHOT',
-                mobilepay                 : 'com.keruyun.osmobile:mobilepay:2.9.0',
-                plugin_pay                : 'com.keruyun.osmobile:plugin-pay:2.9.0',
-                osmobilelib               : 'com.keruyun.osmobile:osmobilelib:2.8.5',
-                snack                     : 'com.keruyun.osmobile:snack:2.9.2',
-                dinner                    : 'com.keruyun.mobile:dinner:2.24.30',
-                queue                     : 'com.keruyun.osmobile:queue:2.8.0-SNAPSHOT',
-                shop                      : 'com.keruyun.osmobile:shop:2.9.1',
-                traderecord               : 'com.keruyun.osmobile:traderecord:2.8.9-SNAPSHOT',
-                cashnoorder_osmobile      : 'com.keruyun.osmobile:cashnoorder-osmobile:2.8.7',
-                groupbuy                  : 'com.keruyun.osmobile:groupbuy:2.8.0-SNAPSHOT',
         ]
 
         ot_java = [
