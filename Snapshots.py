@@ -1,6 +1,7 @@
 from pip._vendor.msgpack.fallback import xrange
 
 
+# 返回list字典
 def getListSnapshotDepends(packagePath):
     with open(packagePath, 'r') as packageGradle:
         packageGradleStr = packageGradle.read()
@@ -39,9 +40,9 @@ def getListSnapshotDepends(packagePath):
             if y.endswith("-SNAPSHOT"):
                 listDependsSnap.append({x: y})
 
-    for snap in listDependsSnap:
-        for x, y in snap.items():
-            print(x, y)
+    # for snap in listDependsSnap:
+    #     for x, y in snap.items():
+    #         print(x, y)
 
     return listDependsSnap
 

@@ -142,6 +142,7 @@ subprojects {
                 account_system_entrance   : 'com.keruyun.mobile:account-system-entrance:1.9.54',
                 trade_business_core       : 'com.keruyun.osmobile:trade-business-core:2.9.24-SNAPSHOT',//1.5.20
                 tradebusiness             : 'com.keruyun.osmobile:tradebusiness:2.9.24-SNAPSHOT',
+                snack                     : 'com.keruyun.osmobile:snack:2.9.2-SNAPSHOT',
         ]
 
         res_provided = [
