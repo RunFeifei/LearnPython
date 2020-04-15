@@ -29,6 +29,8 @@ def getListSnapshotDepends(packagePath):
         if not depend.startswith('//'):
             key = depend[0:depend.index(':')]
             value = depend[depend.index(':') + 1:]
+            if '//' in value:
+                value = value[0:value.index('//')]
             listDepends.append({key: value})
 
     listDependsSnap = []
@@ -37,9 +39,9 @@ def getListSnapshotDepends(packagePath):
             if y.endswith("-SNAPSHOT"):
                 listDependsSnap.append({x: y})
 
-    # for snap in listDependsSnap:
-    #     for x, y in snap.items():
-    #         print(x, y)
+    for snap in listDependsSnap:
+        for x, y in snap.items():
+            print(x, y)
 
     return listDependsSnap
 
