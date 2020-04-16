@@ -3,10 +3,10 @@ subprojects {
     apply plugin: 'idea'
 
     ext {
-        public_repo = {
+        public_repo = [
                 aliyun    : 'http://maven.aliyun.com/nexus/content/groups/public/',
                 jitpack_io: 'https://jitpack.io',
-        }
+        ]
         ab = [
         ]
         nexus_shishike = [

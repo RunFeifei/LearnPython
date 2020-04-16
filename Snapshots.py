@@ -13,18 +13,22 @@ def getListSnapshotDepends(packagePath):
 
     if len(leftMarkIndex) != len(rightMarkIndex):
         raise RuntimeError('len(leftMarkIndex)!=len(rightMarkIndex)')
+    listTypes = getDependType(packagePath)
 
     listDependsMaps = []
     for i in range(0, len(leftMarkIndex)):
         preDepends = packageGradleStr[leftMarkIndex[i] + 1:rightMarkIndex[i]]
         preDepends = preDepends.strip().replace(',', '')
-        # print("**************************************************")
+        print(preDepends)
+        print("**************************************************")
         preDepends = preDepends.splitlines()
-        # print(preDepends)
+        print(preDepends)
         for depend in preDepends:
+            # print(depend)
             if len(depend) > 0:
                 listDependsMaps.append(depend.strip().replace(' ', '').replace('\'', ''))
 
+    # print(listDependsMaps)
     listDepends = []
     for depend in listDependsMaps:
         if not depend.startswith('//'):
@@ -45,6 +49,30 @@ def getListSnapshotDepends(packagePath):
     #         print(x, y)
 
     return listDependsSnap
+
+
+def getDependType(packagePath):
+    with open(packagePath, 'r') as packageGradle:
+        packageGradleStr = packageGradle.read()
+    leftBraceIndex = [i for i in xrange(len(packageGradleStr)) if packageGradleStr.startswith('{', i)]
+    leftMarkIndex = [i for i in xrange(len(packageGradleStr)) if packageGradleStr.startswith('[', i)]
+    rightMarkIndex = [i for i in xrange(len(packageGradleStr)) if packageGradleStr.startswith(']', i)]
+    listTypes = []
+    for i in range(0, len(leftMarkIndex)):
+        if i == 0:
+            listTypes.append(
+                packageGradleStr[leftBraceIndex[1] + 1:leftMarkIndex[0] - 1]
+                    .replace(' ', '')
+                    .replace('=', '')
+                    .replace('\n', ''))
+        else:
+            listTypes.append(
+                packageGradleStr[rightMarkIndex[i - 1] + 1: leftMarkIndex[i] - 1]
+                    .replace(' ', '')
+                    .replace('=', '')
+                    .replace('\n', ''))
+
+    return listTypes
 
 
 def main():
