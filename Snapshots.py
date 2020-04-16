@@ -51,9 +51,9 @@ def getListSnapshotDepends(packagePath):
             if y.endswith("-SNAPSHOT"):
                 listDependsSnap.append({x: y})
 
-    for snap in listDependsSnap:
-        for x, y in snap.items():
-            print(x, y)
+    # for snap in listDependsSnap:
+    #     for x, y in snap.items():
+    #         print(x, y)
 
     return listDependsSnap
 

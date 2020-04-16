@@ -120,15 +120,15 @@ subprojects {
                 trade_business_core       : 'com.keruyun.osmobile:trade-business-core:2.9.24',
                 tradebusiness             : 'com.keruyun.osmobile:tradebusiness:2.9.24',
 
-                paycenter                 : 'com.keruyun.mobile:paycenter:2.9.20',//2.9.10
-                paycenter_board           : 'com.keruyun.mobile:paycenter-board:2.9.20',//2.9.10
+                paycenter                 : 'com.keruyun.mobile:paycenter:2.9.20-SNAPSHOT',//2.9.10
+                paycenter_board           : 'com.keruyun.mobile:paycenter-board:2.9.20-SNAPSHOT',//2.9.10
                 bankpay                   : 'com.keruyun.osmobile:bankpay:2.8.0',
                 icbcposbridge             : 'com.keruyun.osmobile:icbc-pos-bridge:2.1.0',
-                lefukayoupay              : 'com.keruyun.osmobile:lefukayoupay:2.7.30',
+                lefukayoupay              : 'com.keruyun.osmobile:lefukayoupay:2.7.30-SNAPSHOT',
                 groupcoupon               : 'com.keruyun.osmobile:groupcoupon:2.4.89',
                 icard_pay_core            : 'com.keruyun.osmobile:icard-pay-core:2.0.1',
                 icard_pay_ui              : 'com.keruyun.osmobile:icard-pay-ui:2.4.0',
-                batman_card               : 'com.keruyun.android:batman-card:2.5.0',
+                batman_card               : 'com.keruyun.android:batman-card:2.5.0-SNAPSHOT',
                 cashpay                   : 'com.keruyun.osmobile:cashpay:2.8.91',
                 thirdpay                  : 'com.keruyun.osmobile:thirdpay:2.7.11',
                 custompay                 : 'com.keruyun.mobile:custompay:2.4.4',
@@ -142,19 +142,27 @@ subprojects {
                 common_kmobile            : 'com.keruyun.kmobile:commonkmobile:1.5.14',//1.5.20
                 cloud_printer             : 'com.keruyun.osmobile:cloudprinter:1.2.21',
                 cloud_printer_ui          : 'com.keruyun.osmobile:android-cloudprinter-ui:1.2.21',
-                account_system_entrance   : 'com.keruyun.mobile:account-system-entrance:1.9.54',
+                account_system_entrance   : 'com.keruyun.mobile:account-system-entrance:1.9.54-SNAPSHOT',
         ]
-        component_depends_dev = [
-                cloud_printer             : 'com.keruyun.osmobile:cloudprinter:1.2.0-SNAPSHOT',
-                cloud_printer_ui          : 'com.keruyun.osmobile:android-cloudprinter-ui:1.2.0-SNAPSHOT',
-                android_mobileui          : 'com.keruyun.android:android-mobileui:2.8.27-SNAPSHOT',
-                common_kmobile            : 'com.keruyun.kmobile:commonkmobile:1.5.20-SNAPSHOT',//1.5.20
-                paycenter                 : 'com.keruyun.mobile:paycenter:2.9.20-SNAPSHOT',//1.5.20
-                paycenter_board           : 'com.keruyun.mobile:paycenter-board:2.9.20-SNAPSHOT',//1.5.20
-                account_system_entrance   : 'com.keruyun.mobile:account-system-entrance:1.9.54',
-                trade_business_core       : 'com.keruyun.osmobile:trade-business-core:2.9.24-SNAPSHOT',//1.5.20
-                tradebusiness             : 'com.keruyun.osmobile:tradebusiness:2.9.24-SNAPSHOT',
-                snack                     : 'com.keruyun.osmobile:snack:2.9.2-SNAPSHOT',
+
+        osm_depends = [
+                android_login             : 'com.keruyun.android:android-login:2.8.0',
+                android_arouter_cold_start: 'com.keruyun.osmobile:android-arouter-cold-start:2.8.0-SNAPSHOT',//1.5.20
+                osmobile_login_ui         : 'com.keruyun.osmobile:osmobile-login-ui:2.8.12',
+                osmobile_login_debug      : 'com.keruyun.osmobile:osmobile-login-debug:2.8.0-SNAPSHOT',
+                android_os_mobile_login_ad: 'com.keruyun.osmobile:android-os-mobile-login-ad:2.8.0',//1.5.20
+                member                    : 'com.keruyun.osmobile:member:2.8.4',
+                mobilepay                 : 'com.keruyun.osmobile:mobilepay:2.8.11',
+                plugin_pay                : 'com.keruyun.osmobile:plugin-pay:2.8.13',
+                osmobilelib               : 'com.keruyun.osmobile:osmobilelib:2.8.0',//1.5.20
+                snack                     : 'com.keruyun.osmobile:snack:2.8.14-SNAPSHOT',
+                dinner                    : 'com.keruyun.mobile:dinner:2.8.20',//1.5.20
+                queue                     : 'com.keruyun.osmobile:queue:2.8.2',
+                shop                      : 'com.keruyun.osmobile:shop:2.8.0',
+                traderecord               : 'com.keruyun.osmobile:traderecord:2.8.77',
+                cashnoorder_osmobile      : 'com.keruyun.osmobile:cashnoorder-osmobile:2.8.44',
+                groupbuy                  : 'com.keruyun.osmobile:groupbuy:2.8.1',
+                icbc_register             : 'com.keruyun.osmobile:icbc-register:1.0.10',//1.5.20
         ]
 
         res_provided = [
