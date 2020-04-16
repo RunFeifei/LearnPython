@@ -3,7 +3,7 @@ import logging
 import os
 import subprocess
 
-from Config import REPOS_DICT
+from Config import REPOS_DICT, get_clone_file_path
 from Snapshots import getListSnapshotDepends
 
 # 凡是package.gradle文件中以-SNAPSHOT为结尾的包都是待发布的包
@@ -32,7 +32,7 @@ def pre_process_upload_data():
             try:
                 repo = REPOS_DICT[x]
             except KeyError:
-                logging.error('    没有在Config.py中找到配置信息-->' + x)
+                logging.error(' 没有在Config.py中找到配置信息-->' + x)
                 pass
             else:
                 list_upload_data.append(repo)
@@ -64,10 +64,7 @@ def cloneCodes():
             raise RuntimeError('clone ' + upload_data[0] + ' fail !!!!!')
 
 
-def get_clone_file_path(upload_data):
-    clone = upload_data[0]
-    path = clone[clone.rindex('/') + 1:].replace('.git', '')
-    return path
+
 
 
 if __name__ == "__main__":
