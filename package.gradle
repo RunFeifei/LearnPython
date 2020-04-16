@@ -5,27 +5,39 @@ subprojects {
     ext {
         public_repo = [
                 aliyun    : 'http://maven.aliyun.com/nexus/content/groups/public/',
+
                 jitpack_io: 'https://jitpack.io',
         ]
         ab = [
         ]
         nexus_shishike = [
+
                 jcenter         : 'http://nexus.shishike.com/nexus/content/repositories/jcenter/',
-                releases        : 'http://nexus.shishike.com/nexus/content/repositories/releases/',
-                android_release : 'http://nexus.shishike.com/nexus/content/repositories/AndroidRelease/',
+
+                releases        : 'http://nexus.shishike.com/nexus/content/repositories/releases/',//呼b呼呼呼个
+
+                //android_release : 'http://nexus.shishike.com/nexus/content/repositories/AndroidRelease/',
+
                 android_snapshot: 'http://nexus.shishike.com/nexus/content/repositories/AndroidSnapshot/',
+
         ]
 
         depends = [
+
                 com_android_support_support_core_ui    : 'com.android.support:support-core-ui:25.0.1',
-                com_android_support_support_annotations: 'com.android.support:support-annotations:25.0.1',
-                com_android_support_support_v4         : 'com.android.support:support-v4:25.0.1',
-                com_android_support_appcompat_7        : 'com.android.support:appcompat-v7:25.0.1',
-                com_android_support_recyclerview_v7    : 'com.android.support:recyclerview-v7:25.0.1',
-                com_android_support_cardview_v7        : 'com.android.support:cardview-v7:25.0.1',
-                com_android_support_design             : 'com.android.support:design:25.0.1',
-                com_android_support_multidex           : 'com.android.support:multidex:1.0.1',
+
+                com_android_support_support_annotations: 'com.android.support:support-annotations:25.0.1',//汉语语音
+
+//                 com_android_support_support_v4         : 'com.android.support:support-v4:25.0.1',
+                com_android_support_appcompat_7        : 'com.android.support:appcompat-v7:25.0.1',//汉语语音
+
+
+                com_android_support_recyclerview_v7    : 'com.android.support:recyclerview-v7:25.0.1',//汉语语音
+                com_android_support_cardview_v7        : 'com.android.support:cardview-v7:25.0.1',//汉语语音
+                com_android_support_design             : 'com.android.support:design:25.0.1',//汉语语音
+                com_android_support_multidex           : 'com.android.support:multidex:1.0.1',//汉语语音
                 com_android_constraint_layout          : 'com.android.support.constraint:constraint-layout:1.0.2',
+
                 android_arch_lifecycle_runtime         : 'android.arch.lifecycle:runtime:1.1.0',
                 android_arch_lifecycle_extensions      : 'android.arch.lifecycle:extensions:1.1.0',
                 turbodex                               : 'com.github.asLody:turbodex:1.1.0',

@@ -11,6 +11,9 @@ from Snapshots import getListSnapshotDepends
 # 以快餐为例 2.9.2-SNAPSHOT是扫描到的版本号,需要cd到snack目录下,修改gradle文件中的版本号为2.9.2,然后执行打包脚本,然后commit&push
 # 然后修改storage下的package.gradle目录,把snack:2.9.2-SNAPSHOT修改为snack:2.9.2
 
+
+# package.gradle文件禁止有注释行 禁止在行末尾进行注释 禁止在每一组的依赖中间有空行
+
 # list字典
 snap_shots = getListSnapshotDepends('/Users/fei/Codes/PYTHON/Package/package.gradle')
 

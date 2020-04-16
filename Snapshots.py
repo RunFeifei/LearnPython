@@ -14,39 +14,46 @@ def getListSnapshotDepends(packagePath):
     if len(leftMarkIndex) != len(rightMarkIndex):
         raise RuntimeError('len(leftMarkIndex)!=len(rightMarkIndex)')
     listTypes = getDependType(packagePath)
+    # print('type len-->' + str(len(listTypes)))
+
+    preDepends1 = []
+    for i in range(0, len(leftMarkIndex)):
+        temp = packageGradleStr[leftMarkIndex[i] + 1:rightMarkIndex[i]]
+        temp = temp.strip().replace(',', '')
+        preDepends1.append(temp.splitlines())
+    # print('type len-->' + str(len(preDepends1)))
 
     listDependsMaps = []
-    for i in range(0, len(leftMarkIndex)):
-        preDepends = packageGradleStr[leftMarkIndex[i] + 1:rightMarkIndex[i]]
-        preDepends = preDepends.strip().replace(',', '')
-        print(preDepends)
-        print("**************************************************")
-        preDepends = preDepends.splitlines()
-        print(preDepends)
-        for depend in preDepends:
-            # print(depend)
-            if len(depend) > 0:
-                listDependsMaps.append(depend.strip().replace(' ', '').replace('\'', ''))
+    for i in range(0, len(preDepends1)):
+        for depend in preDepends1[i]:
+            # 这里防止有空行 防止有maven地址
+            if len(depend) > 0 and (not depend.startswith('//')) and ('http' not in depend):
+                temp = depend.replace(' ', '').replace('\'', '')
+                temp = listTypes[i] + '.' + temp
+                listDependsMaps.append(temp)
 
-    # print(listDependsMaps)
     listDepends = []
     for depend in listDependsMaps:
+        # 这里去掉注释行
+        # print(depend)
         if not depend.startswith('//'):
             key = depend[0:depend.index(':')]
             value = depend[depend.index(':') + 1:]
+            # 这里防止末尾有注释
             if '//' in value:
                 value = value[0:value.index('//')]
             listDepends.append({key: value})
 
     listDependsSnap = []
     for depend in listDepends:
+        # print(depend)
         for x, y in depend.items():
             if y.endswith("-SNAPSHOT"):
                 listDependsSnap.append({x: y})
 
-    # for snap in listDependsSnap:
-    #     for x, y in snap.items():
-    #         print(x, y)
+    for snap in listDependsSnap:
+        for x, y in snap.items():
+            print(x, y)
 
     return listDependsSnap
 
