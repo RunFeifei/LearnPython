@@ -3,7 +3,7 @@ import logging
 import os
 import subprocess
 
-from Config import REPOS_DICT, get_clone_file_path, LOCAL_GIT_REPOS
+from Config import REPOS_DICT, get_clone_file_path, LOCAL_GIT_REPOS, PACKAGE_GRADLE_PATH
 from Snapshots import getListSnapshotDepends
 
 # 凡是package.gradle文件中以-SNAPSHOT为结尾的包都是待发布的包
@@ -15,7 +15,7 @@ from Snapshots import getListSnapshotDepends
 # package.gradle文件禁止有注释行 禁止在行末尾进行注释 禁止在每一组的依赖中间有空行
 
 # list字典
-snap_shots = getListSnapshotDepends('/Users/fei/Codes/PYTHON/Package/package.gradle')
+snap_shots = getListSnapshotDepends(PACKAGE_GRADLE_PATH)
 
 
 def main():

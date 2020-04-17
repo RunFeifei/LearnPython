@@ -1,3 +1,7 @@
+# 遍历多叉树
+# https://www.jianshu.com/p/dee8284b2dc4
+
+
 # 单条数据的格式为
 # '在package.grale中定义的key':['clone地址','项目中对应module的路径名']
 REPOS_DICT = {
@@ -8,6 +12,9 @@ REPOS_DICT = {
 
 # 此目录下会进行格式化操作 不要作为其他用途
 LOCAL_GIT_REPOS = ' ./AndroidProjects/'
+
+# 最新的待发布的package.gradle路径
+PACKAGE_GRADLE_PATH = '/Users/fei/Codes/PYTHON/Package/package.gradle'
 
 
 # upload_data=['http://gitlab.shishike.com/c_iphone/Snack.git', 'Snack']

@@ -2,6 +2,9 @@ from pip._vendor.msgpack.fallback import xrange
 
 
 # 返回list字典
+from Config import PACKAGE_GRADLE_PATH
+
+
 def getListSnapshotDepends(packagePath):
     with open(packagePath, 'r') as packageGradle:
         packageGradleStr = packageGradle.read()
@@ -83,7 +86,7 @@ def getDependType(packagePath):
 
 
 def main():
-    getListSnapshotDepends('/Users/fei/Codes/PYTHON/Package/package.gradle')
+    getListSnapshotDepends(PACKAGE_GRADLE_PATH)
 
 
 if __name__ == "__main__":
