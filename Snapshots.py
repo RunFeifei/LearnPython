@@ -1,10 +1,19 @@
 from pip._vendor.msgpack.fallback import xrange
 
-
-# 返回list字典
 from Config import PACKAGE_GRADLE_PATH
 
 
+def get_snaps_key(packagePath):
+    keys = []
+    for snap in getListSnapshotDepends(packagePath):
+        for x, y in snap.items():
+            keys.append(x)
+    return keys
+
+
+# packagePath package.gradle文件磁盘地址
+# return 返回package.gradle文件中所有的snapshot依赖
+# [{'component_depends.paycenter': 'com.keruyun.mobile:paycenter:2.8.218-SNAPSHOT'}, {'component_depends.paycenter_board': 'com.keruyun.mobile:paycenter-board:2.8.218-SNAPSHOT'}, {'osm_depends.snack': 'com.keruyun.osmobile:snack:2.8.14-SNAPSHOT'}]
 def getListSnapshotDepends(packagePath):
     with open(packagePath, 'r') as packageGradle:
         packageGradleStr = packageGradle.read()
@@ -54,10 +63,6 @@ def getListSnapshotDepends(packagePath):
             if y.endswith("-SNAPSHOT"):
                 listDependsSnap.append({x: y})
 
-    # for snap in listDependsSnap:
-    #     for x, y in snap.items():
-    #         print(x, y)
-
     return listDependsSnap
 
 
@@ -86,7 +91,9 @@ def getDependType(packagePath):
 
 
 def main():
-    getListSnapshotDepends(PACKAGE_GRADLE_PATH)
+    for snap in getListSnapshotDepends(PACKAGE_GRADLE_PATH):
+        for x, y in snap.items():
+            print(x, y)
 
 
 if __name__ == "__main__":

@@ -1,7 +1,3 @@
-# 遍历多叉树
-# https://www.jianshu.com/p/dee8284b2dc4
-
-
 # 单条数据的格式为
 # '在package.grale中定义的key':['clone地址','项目中对应module的路径名']
 REPOS_DICT = {
@@ -17,8 +13,9 @@ LOCAL_GIT_REPOS = ' ./AndroidProjects/'
 PACKAGE_GRADLE_PATH = '/Users/fei/Codes/PYTHON/Package/package.gradle'
 
 
-# upload_data=['http://gitlab.shishike.com/c_iphone/Snack.git', 'Snack']
-# return Snack
+# upload_data=['http://gitlab.shishike.com/c_iphone/Snack.git', 'snack']
+# if LOCAL_GIT_REPOS = ' ./AndroidProjects/'
+# return ./AndroidProjects/Snack
 def get_clone_file_path(upload_data):
     clone = upload_data[0]
     path = clone[clone.rindex('/') + 1:].replace('.git', '')
@@ -26,10 +23,11 @@ def get_clone_file_path(upload_data):
 
 
 # upload_data=['http://gitlab.shishike.com/c_iphone/Snack.git', 'Snack']
-# return Snack/Snack
-def get_module_file_path(upload_data):
+# if LOCAL_GIT_REPOS = ' ./AndroidProjects/'
+# return ./AndroidProjects/Snack/snack/build.gradle
+def get_module_gradle_path(upload_data):
     path = get_clone_file_path(upload_data)
-    path = path + '/' + upload_data[1]
+    path = path + '/' + upload_data[1] + '/build.gradle'
     return path
 
 

@@ -3,8 +3,7 @@ import logging
 import os
 import subprocess
 
-from Config import REPOS_DICT, get_clone_file_path, PACKAGE_GRADLE_PATH, get_package_file_name, get_module_file_path, \
-    LOCAL_GIT_REPOS
+from Config import *
 from Snapshots import getListSnapshotDepends
 
 # 凡是package.gradle文件中以-SNAPSHOT为结尾的包都是待发布的包
@@ -15,9 +14,6 @@ from Snapshots import getListSnapshotDepends
 
 # package.gradle文件禁止有注释行 禁止在行末尾进行注释 禁止在每一组的依赖中间有空行
 
-# list字典
-snap_shots = getListSnapshotDepends(PACKAGE_GRADLE_PATH)
-
 
 def main():
     print(pre_process_upload_data())
@@ -27,6 +23,7 @@ def main():
 
 
 def pre_process_upload_data():
+    snap_shots = getListSnapshotDepends(PACKAGE_GRADLE_PATH)
     list_upload_data = []
     for snap in snap_shots:
         for x, y in snap.items():
@@ -75,7 +72,8 @@ def check_pros():
                     package_cfg = line.replace('\n', '').strip()
                     package_cfg = package_cfg[package_cfg.rindex('/') + 1:]
                     if package_cfg != get_package_file_name():
-                        raise RuntimeError(get_module_file_path(upload_data) + '-->PACKAGE_GRADLE_FILE 配置错误')
+                        raise RuntimeError(get_module_gradle_path(upload_data)
+                                           + '-->PACKAGE_GRADLE_FILE 和 Config.PACKAGE_GRADLE_PATH配置不一致')
 
 
 def main():
