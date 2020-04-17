@@ -3,7 +3,7 @@ import logging
 import os
 import subprocess
 
-from Config import REPOS_DICT, get_clone_file_path
+from Config import REPOS_DICT, get_clone_file_path, LOCAL_GIT_REPOS
 from Snapshots import getListSnapshotDepends
 
 # 凡是package.gradle文件中以-SNAPSHOT为结尾的包都是待发布的包
@@ -40,31 +40,25 @@ def pre_process_upload_data():
 
 
 def cloneCodes():
-    if os.path.exists('./AndroidProjects'):
-        status, output = subprocess.getstatusoutput('rm -rf ./AndroidProjects')
+    if os.path.exists(LOCAL_GIT_REPOS.strip()):
+        status, output = subprocess.getstatusoutput('rm -rf' + LOCAL_GIT_REPOS)
         if status != 0:
-            raise RuntimeError('rm -rf ./AndroidProjects failed')
+            raise RuntimeError('rm -rf LOCAL_GIT_REPOS failed')
 
-    status, output = subprocess.getstatusoutput('mkdir AndroidProjects')
+    status, output = subprocess.getstatusoutput('mkdir' + LOCAL_GIT_REPOS)
     if status != 0:
-        raise RuntimeError('mkdir AndroidProjects failed')
-    status, output = subprocess.getstatusoutput('cd ./AndroidProjects')
-    if status != 0:
-        raise RuntimeError('cd ./AndroidProjects failed')
+        raise RuntimeError('mkdir LOCAL_GIT_REPOS failed')
     list_upload_data = pre_process_upload_data()
     print(list_upload_data)
     for upload_data in list_upload_data:
         path = get_clone_file_path(upload_data)
-        if os.path.exists('./AndroidProjects/' + path):
+        if os.path.exists(path.strip()):
             continue
-        order = 'git clone -b develop ' + upload_data[0] + ' ./AndroidProjects/' + path
+        order = 'git clone -b develop ' + upload_data[0] + path
         status, output = subprocess.getstatusoutput(order)
         print(output)
         if status != 0:
             raise RuntimeError('clone ' + upload_data[0] + ' fail !!!!!')
-
-
-
 
 
 if __name__ == "__main__":
