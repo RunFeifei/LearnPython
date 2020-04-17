@@ -31,3 +31,7 @@ def get_module_file_path(upload_data):
     path = get_clone_file_path(upload_data)
     path = path + '/' + upload_data[1]
     return path
+
+
+def get_package_file_name():
+    return PACKAGE_GRADLE_PATH[PACKAGE_GRADLE_PATH.rindex('/'):]

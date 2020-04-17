@@ -3,7 +3,7 @@ import logging
 import os
 import subprocess
 
-from Config import REPOS_DICT, get_clone_file_path, LOCAL_GIT_REPOS, PACKAGE_GRADLE_PATH
+from Config import REPOS_DICT, get_clone_file_path, PACKAGE_GRADLE_PATH, get_package_file_name, get_module_file_path
 from Snapshots import getListSnapshotDepends
 
 # 凡是package.gradle文件中以-SNAPSHOT为结尾的包都是待发布的包
@@ -39,17 +39,17 @@ def pre_process_upload_data():
     return list_upload_data
 
 
-def cloneCodes():
-    if os.path.exists(LOCAL_GIT_REPOS.strip()):
-        status, output = subprocess.getstatusoutput('rm -rf' + LOCAL_GIT_REPOS)
-        if status != 0:
-            raise RuntimeError('rm -rf LOCAL_GIT_REPOS failed')
+def clone_codes():
+    # if os.path.exists(LOCAL_GIT_REPOS.strip()):
+    #     status, output = subprocess.getstatusoutput('rm -rf' + LOCAL_GIT_REPOS)
+    #     if status != 0:
+    #         raise RuntimeError('rm -rf LOCAL_GIT_REPOS failed')
 
-    status, output = subprocess.getstatusoutput('mkdir' + LOCAL_GIT_REPOS)
-    if status != 0:
-        raise RuntimeError('mkdir LOCAL_GIT_REPOS failed')
+    # status, output = subprocess.getstatusoutput('mkdir' + LOCAL_GIT_REPOS)
+    # if status != 0:
+    #     raise RuntimeError('mkdir LOCAL_GIT_REPOS failed')
     list_upload_data = pre_process_upload_data()
-    print(list_upload_data)
+    # print(list_upload_data)
     for upload_data in list_upload_data:
         path = get_clone_file_path(upload_data)
         if os.path.exists(path.strip()):
@@ -61,5 +61,22 @@ def cloneCodes():
             raise RuntimeError('clone ' + upload_data[0] + ' fail !!!!!')
 
 
+# 检查所有拉下来的项目是否都依赖的同一个配置文件
+def check_pros():
+    clone_codes()
+    list_upload_data = pre_process_upload_data()
+    for upload_data in list_upload_data:
+        path = get_clone_file_path(upload_data)
+        packagePath = path + '/gradle.properties'
+        # print(packagePath)
+        with open(packagePath.strip(), 'r') as packageGradle:
+            for line in packageGradle.readlines():
+                if line.startswith('PACKAGE_GRADLE_FILE') or line.startswith('#PACKAGE_GRADLE_FILE'):
+                    package_cfg = line.replace('\n', '').strip()
+                    package_cfg = package_cfg[package_cfg.rindex('/') + 1:]
+                    if package_cfg != get_package_file_name():
+                        raise RuntimeError(get_module_file_path(upload_data) + '-->PACKAGE_GRADLE_FILE 配置错误')
+
+
 if __name__ == "__main__":
-    cloneCodes()
+    check_pros()
