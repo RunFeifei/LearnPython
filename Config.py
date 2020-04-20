@@ -16,6 +16,7 @@ LOCAL_GIT_REPOS = ' ./AndroidProjects/'
 # 最新的待发布的package.gradle文件名
 PACKAGE_GRADLE_NAME = 'package_2.8.13'
 
+
 # upload_data=['http://gitlab.shishike.com/c_iphone/Snack.git', 'snack']
 # if LOCAL_GIT_REPOS = ' ./AndroidProjects/'
 # return ./AndroidProjects/Snack
