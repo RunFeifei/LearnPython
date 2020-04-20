@@ -1,10 +1,12 @@
-# getstatusoutput 同步执行
 import logging
 import os
 import subprocess
 
 from Config import *
 from Snapshots import getListSnapshotDepends
+
+# 此文件负责远端工程clone到本地
+# getstatusoutput 同步执行
 
 # 凡是package.gradle文件中以-SNAPSHOT为结尾的包都是待发布的包
 # snack   : 'com.keruyun.osmobile:snack:2.9.2-SNAPSHOT',
@@ -14,16 +16,9 @@ from Snapshots import getListSnapshotDepends
 
 # package.gradle文件禁止有注释行 禁止在行末尾进行注释 禁止在每一组的依赖中间有空行
 
-
-def main():
-    print(pre_process_upload_data())
-    status, output = subprocess.getstatusoutput('git status')
-    print(status)
-    print(output)
-
-
+# 拿到
 def pre_process_upload_data():
-    snap_shots = getListSnapshotDepends(PACKAGE_GRADLE_PATH)
+    snap_shots = getListSnapshotDepends(get_latest_package_gradle_file())
     list_upload_data = []
     for snap in snap_shots:
         for x, y in snap.items():

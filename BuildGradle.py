@@ -1,4 +1,4 @@
-from Shell import *
+from Projects import *
 from Snapshots import get_snaps_key
 
 
@@ -9,7 +9,7 @@ class NoChildSnapError(Exception):
     pass
 
 
-root_snap_shots = get_snaps_key(PACKAGE_GRADLE_PATH)
+root_snap_shots = get_snaps_key(get_latest_package_gradle_file())
 module_upload_ed = []
 
 

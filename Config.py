@@ -1,6 +1,11 @@
 # 单条数据的格式为
 # '在package.grale中定义的key':['clone地址','项目中对应module的路径名']
 
+# 配置文件路径
+from Storage import get_storage_package_gradle
+
+REPOS_STORAGE = ['http://gitlab.shishike.com/OSMobile/mobile-storage.git', 'mobile-storage']
+
 REPOS_DICT = {
     'osm_depends.snack': ['http://gitlab.shishike.com/c_iphone/Snack.git', 'Snack'],
     'component_depends.paycenter': ['http://gitlab.shishike.com/c_iphone/PayCenter.git', 'paycenter'],
@@ -11,7 +16,11 @@ REPOS_DICT = {
 LOCAL_GIT_REPOS = ' ./AndroidProjects/'
 
 # 最新的待发布的package.gradle路径
-PACKAGE_GRADLE_PATH = '/Users/fei/Codes/PYTHON/Package/package.gradle'
+PACKAGE_GRADLE_NAME = 'package_2.8.13'
+
+
+def get_latest_package_gradle_file():
+    return get_storage_package_gradle()
 
 
 # upload_data=['http://gitlab.shishike.com/c_iphone/Snack.git', 'snack']
@@ -36,9 +45,9 @@ def get_module_gradle_path(upload_data):
 # return ./AndroidProjects/Snack/gradle.properties
 def to_project_gradle_properties_path(module_gradle_path):
     module_gradle_path = module_gradle_path.replace('/build.gradle', '')
-    module_gradle_path = module_gradle_path[:module_gradle_path.rindex('/')+1]
+    module_gradle_path = module_gradle_path[:module_gradle_path.rindex('/') + 1]
     return module_gradle_path + 'gradle.properties'
 
 
 def get_package_file_name():
-    return PACKAGE_GRADLE_PATH[PACKAGE_GRADLE_PATH.rindex('/'):]
+    return get_latest_package_gradle_file()[get_latest_package_gradle_file().rindex('/'):]
