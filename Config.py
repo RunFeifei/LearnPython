@@ -1,5 +1,6 @@
 # 单条数据的格式为
 # '在package.grale中定义的key':['clone地址','项目中对应module的路径名']
+
 REPOS_DICT = {
     'osm_depends.snack': ['http://gitlab.shishike.com/c_iphone/Snack.git', 'Snack'],
     'component_depends.paycenter': ['http://gitlab.shishike.com/c_iphone/PayCenter.git', 'paycenter'],
@@ -29,6 +30,14 @@ def get_module_gradle_path(upload_data):
     path = get_clone_file_path(upload_data)
     path = path + '/' + upload_data[1] + '/build.gradle'
     return path
+
+
+# module_gradle_path=./AndroidProjects/Snack/snack/build.gradle
+# return ./AndroidProjects/Snack/gradle.properties
+def to_project_gradle_properties_path(module_gradle_path):
+    module_gradle_path = module_gradle_path.replace('/build.gradle', '')
+    module_gradle_path = module_gradle_path[:module_gradle_path.rindex('/')+1]
+    return module_gradle_path + 'gradle.properties'
 
 
 def get_package_file_name():
