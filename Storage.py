@@ -3,10 +3,21 @@
 import os
 import subprocess
 
+# return ' ./AndroidProjects/mobile-storage/package_gradle/osmobile/package_2.8.13'
 from Config import get_clone_file_path, REPOS_STORAGE, PACKAGE_GRADLE_NAME
 
+# 最新的待发布的package.gradle文件路径
+PACKAGE_GRADLE_PATH = ''
 
-# ' ./AndroidProjects/mobile-storage'
+
+def get_latest_package_gradle_file():
+    global PACKAGE_GRADLE_PATH
+    if PACKAGE_GRADLE_PATH == '':
+        PACKAGE_GRADLE_PATH = get_storage_package_gradle()
+    return PACKAGE_GRADLE_PATH
+
+
+# 获取最新的待发布的package.gradle文件路径
 def get_storage_package_gradle():
     path = get_clone_file_path(REPOS_STORAGE)
     if os.path.exists(path.strip()):
@@ -24,8 +35,15 @@ def get_storage_package_gradle():
     return path + '/package_gradle/osmobile/' + PACKAGE_GRADLE_NAME
 
 
+# key=osm_depends.snack
+def modify_pkg_and_push(key):
+    key = key[key.index('.')+1:]
+
+
+
+
 def main():
-    get_storage_package_gradle()
+    modify_pkg_and_push('osm_depends.snack')
 
 
 if __name__ == "__main__":

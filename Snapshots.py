@@ -1,6 +1,6 @@
 from pip._vendor.msgpack.fallback import xrange
 
-from Config import get_latest_package_gradle_file
+from Storage import PACKAGE_GRADLE_PATH
 
 
 def get_snaps_key(packagePath):
@@ -91,7 +91,7 @@ def getDependType(packagePath):
 
 
 def main():
-    for snap in getListSnapshotDepends(get_latest_package_gradle_file()):
+    for snap in getListSnapshotDepends(PACKAGE_GRADLE_PATH):
         for x, y in snap.items():
             print(x, y)
 

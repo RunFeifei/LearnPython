@@ -17,8 +17,11 @@ from Snapshots import getListSnapshotDepends
 # package.gradle文件禁止有注释行 禁止在行末尾进行注释 禁止在每一组的依赖中间有空行
 
 # 拿到
+from Storage import PACKAGE_GRADLE_PATH
+
+
 def pre_process_upload_data():
-    snap_shots = getListSnapshotDepends(get_latest_package_gradle_file())
+    snap_shots = getListSnapshotDepends(PACKAGE_GRADLE_PATH)
     list_upload_data = []
     for snap in snap_shots:
         for x, y in snap.items():

@@ -4,12 +4,14 @@ from Snapshots import get_snaps_key
 
 # 遍历多叉树
 # https://www.jianshu.com/p/dee8284b2dc4
+from Storage import PACKAGE_GRADLE_PATH
+
 
 class NoChildSnapError(Exception):
     pass
 
 
-root_snap_shots = get_snaps_key(get_latest_package_gradle_file())
+root_snap_shots = get_snaps_key(PACKAGE_GRADLE_PATH)
 module_upload_ed = []
 
 

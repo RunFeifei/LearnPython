@@ -1,8 +1,6 @@
 # 单条数据的格式为
 # '在package.grale中定义的key':['clone地址','项目中对应module的路径名']
 
-# 配置文件路径
-from Storage import get_storage_package_gradle
 
 REPOS_STORAGE = ['http://gitlab.shishike.com/OSMobile/mobile-storage.git', 'mobile-storage']
 
@@ -15,13 +13,8 @@ REPOS_DICT = {
 # 此目录下会进行格式化操作 不要作为其他用途
 LOCAL_GIT_REPOS = ' ./AndroidProjects/'
 
-# 最新的待发布的package.gradle路径
+# 最新的待发布的package.gradle文件名
 PACKAGE_GRADLE_NAME = 'package_2.8.13'
-
-
-def get_latest_package_gradle_file():
-    return get_storage_package_gradle()
-
 
 # upload_data=['http://gitlab.shishike.com/c_iphone/Snack.git', 'snack']
 # if LOCAL_GIT_REPOS = ' ./AndroidProjects/'
@@ -50,4 +43,4 @@ def to_project_gradle_properties_path(module_gradle_path):
 
 
 def get_package_file_name():
-    return get_latest_package_gradle_file()[get_latest_package_gradle_file().rindex('/'):]
+    return PACKAGE_GRADLE_PATH[PACKAGE_GRADLE_PATH.rindex('/'):]
