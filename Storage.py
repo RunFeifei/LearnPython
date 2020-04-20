@@ -68,9 +68,10 @@ def modify_pkg_and_push(key):
 
 def main():
     path = get_clone_file_path(REPOS_STORAGE)
-    path = './'
+    path = ' ./'
     key = 'test'
-    key = 'cd{} & git pull & git commit -a -m {} & git push origin'.format(path, '\'OS_自动打包 更新\'' + key)
+    commit = '\"OS_自动打包 更新{}\"'.format(key)
+    key = 'cd{} && git pull && git add -A && git commit -a -m {} && git push origin'.format(path, commit)
     status, output = subprocess.getstatusoutput(key)
     if status != 0:
         raise RuntimeError('mkdir LOCAL_GIT_REPOS failed')
