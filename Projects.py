@@ -55,6 +55,10 @@ def clone_codes():
         print(output)
         if status != 0:
             raise RuntimeError('clone ' + upload_data[0] + ' fail !!!!!')
+        status, output = subprocess.getstatusoutput('ggsup')
+        print(output)
+        if status != 0:
+            raise RuntimeError('clone ggsup fail !!!!!')
 
 
 # 检查所有拉下来的项目是否都依赖的同一个配置文件
@@ -69,7 +73,7 @@ def check_pros():
                 if line.startswith('PACKAGE_GRADLE_FILE') or line.startswith('#PACKAGE_GRADLE_FILE'):
                     package_cfg = line.replace('\n', '').strip()
                     package_cfg = package_cfg[package_cfg.rindex('/') + 1:]
-                    if package_cfg != get_package_file_name():
+                    if package_cfg != PACKAGE_GRADLE_NAME:
                         raise RuntimeError(get_module_gradle_path(upload_data)
                                            + '-->PACKAGE_GRADLE_FILE 和 Config.PACKAGE_GRADLE_PATH配置不一致')
 

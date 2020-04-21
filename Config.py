@@ -1,7 +1,6 @@
 # 单条数据的格式为
 # '在package.grale中定义的key':['clone地址','项目中对应module的路径名']
 
-
 REPOS_STORAGE = ['http://gitlab.shishike.com/OSMobile/mobile-storage.git', 'mobile-storage']
 
 REPOS_DICT = {
@@ -43,5 +42,9 @@ def to_project_gradle_properties_path(module_gradle_path):
     return module_gradle_path + 'gradle.properties'
 
 
-def get_package_file_name():
-    return PACKAGE_GRADLE_PATH[PACKAGE_GRADLE_PATH.rindex('/'):]
+# module_gradle_path=./AndroidProjects/Snack/snack/build.gradle
+# return snack
+def to_module_name(module_gradle_path):
+    module_gradle_path = module_gradle_path.replace('/build.gradle', '')
+    module_gradle_path = module_gradle_path[module_gradle_path.rindex('/') + 1:]
+    return module_gradle_path

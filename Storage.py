@@ -24,7 +24,7 @@ def get_latest_package_gradle_file():
 def get_storage_package_gradle():
     path = get_clone_file_path(REPOS_STORAGE)
     if os.path.exists(path.strip()):
-        status, output = subprocess.getstatusoutput('cd' + path + ' & git pull')
+        status, output = subprocess.getstatusoutput('cd' + path + ' && git pull')
         print('git pull mobile-storage--> ' + output)
         if status != 0:
             raise RuntimeError('git pull mobile-storage failed')
@@ -39,6 +39,7 @@ def get_storage_package_gradle():
 
 
 # key=osm_depends.snack
+# 把mobile-storage工程下面指定的packageGradle中的snack的maven地址去掉-SNAPSHOT 并push
 def modify_pkg_and_push(key):
     key = key[key.index('.') + 1:]
     with open(PACKAGE_GRADLE_PATH, 'r') as packageGradle:
@@ -61,21 +62,17 @@ def modify_pkg_and_push(key):
     if status == -1:
         raise RuntimeError(PACKAGE_GRADLE_PATH + ' 文件写入失败')
 
-    # status, output = subprocess.getstatusoutput(')
-    # if status != 0:
-    #     raise RuntimeError('mkdir LOCAL_GIT_REPOS failed')
-
-
-def main():
     path = get_clone_file_path(REPOS_STORAGE)
-    path = ' ./'
-    key = 'test'
     commit = '\"OS_自动打包 更新{}\"'.format(key)
     key = 'cd{} && git pull && git add -A && git commit -a -m {} && git push origin'.format(path, commit)
     status, output = subprocess.getstatusoutput(key)
     if status != 0:
-        raise RuntimeError('mkdir LOCAL_GIT_REPOS failed')
+        raise RuntimeError('commit && push {} failed'.format(REPOS_STORAGE[0]))
     print(output)
+
+
+def main():
+    pass
 
 
 if __name__ == "__main__":

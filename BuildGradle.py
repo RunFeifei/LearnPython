@@ -1,7 +1,6 @@
 from Projects import *
 from Snapshots import get_snaps_key
 
-
 # 遍历多叉树
 # https://www.jianshu.com/p/dee8284b2dc4
 from Storage import PACKAGE_GRADLE_PATH
@@ -12,6 +11,7 @@ class NoChildSnapError(Exception):
 
 
 root_snap_shots = get_snaps_key(PACKAGE_GRADLE_PATH)
+# 上传完成的包记录
 module_upload_ed = []
 
 
@@ -68,24 +68,51 @@ def get_child_snap(module_gradle_path):
 
 
 def upload_module_archive(module_gradle_path):
+    # 先去修改gradle.properties
+    modify_gradle_properties(module_gradle_path)
+
     module_path = module_gradle_path.replace('/build.gradle', '')
     status, output = subprocess.getstatusoutput(
-        'cd ' + module_path + ' & ' + '../gradlew clean build uploadArchives')
+        'cd ' + module_path + ' && ' + '../gradlew clean build uploadArchives')
     if status != 0:
         raise RuntimeError('upload_moddule_archive failed')
     module_upload_ed.append(module_gradle_path)
 
 
-def commit_gradle_properties(module_gradle_path):
+def modify_gradle_properties(module_gradle_path):
+    module_name = to_module_name(module_gradle_path)
     project_gradle_properties_path = to_project_gradle_properties_path(module_gradle_path)
-    with open(project_gradle_properties_path.strip(), 'r') as packageGradle:
-        for line in packageGradle.readlines():
-            if line.startswith('VERSION_NAME') or line.startswith('#VERSION_NAME'):
-                # 更改项目版本号并push
-                pass
+    project_gradle_properties_path = project_gradle_properties_path.strip()
 
+    file_changed = False
+    # 先读取
+    with open(project_gradle_properties_path, 'r') as packageGradle:
+        packageGradleStr = packageGradle.readlines()
 
+    for i in range(0, len(packageGradleStr)):
+        line = packageGradleStr[i].strip()
+        # 把#PACKAGE_GRADLE_FILE的开关打开,以便拉取最新的配置文件
+        if line.startswith('#PACKAGE_GRADLE_FILE'):
+            packageGradleStr[i] = packageGradleStr[i].replace('#PACKAGE_GRADLE_FILE', 'PACKAGE_GRADLE_FILE')
+            file_changed = True
+        # 更改版本号码,去掉-SNAPSHOT
+        if line.startswith('VERSION_NAME'):
+            packageGradleStr[i] = packageGradleStr[i].replace('-SNAPSHOT', '')
+            file_changed = True
 
+    # 把文件的更改写入
+    if file_changed:
+        with open(project_gradle_properties_path, 'w') as packageGradle:
+            packageGradle.writelines(packageGradleStr)
+            packageGradle.close()
+
+    # path = get_clone_file_path(REPOS_STORAGE)
+    # commit = '\"OS_自动打包 更新{}\"'.format(key)
+    # key = 'cd{} && git pull && git add -A && git commit -a -m {} && git push origin'.format(path, commit)
+    # status, output = subprocess.getstatusoutput(key)
+    # if status != 0:
+    #     raise RuntimeError('commit&push {} failed'.format(REPOS_STORAGE[0]))
+    # print(output)
 
 
 def main():
